@@ -1,3 +1,2 @@
-# VueJS + TypeScript + ElementUI + Webpack Starter
+# Max-front in Vue.js
 
-Todo : Complete this readme
