@@ -29,6 +29,7 @@
     "css-loader": "^2.1.0",
     "element-ui": "^2.4.11",
     "lodash": "^4.17.11",
-    "typescript-debounce-decorator": "0.0.17"
+    "typescript-debounce-decorator": "0.0.17",
+    "vue-router": "^3.0.2"
   }
 }
