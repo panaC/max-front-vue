@@ -16,6 +16,7 @@ import Login from './login.vue';
 import Booking from './booking.vue';
 import Register from './register.vue';
 import Account from './account.vue';
+import Logout from './logout.vue';
 
 import { store } from '../store/store';
 
@@ -25,6 +26,7 @@ export const router = new VueRouter({
     { path: '/register', component: Register },
     { path: '/booking', component: Booking },
     { path: '/account', component: Account },
+    { path: '/logout', component: Logout },
     { path: '*', component: Booking },
   ]
 })

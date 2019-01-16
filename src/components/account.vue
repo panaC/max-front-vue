@@ -13,7 +13,6 @@
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click="handleSubmit" >Modify</el-button>
     </el-form-item>
-    <router-link to="/register" style="text-align: center; display: block">Register</router-link>
   </el-form>
 </template>
 

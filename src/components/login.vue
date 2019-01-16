@@ -23,6 +23,7 @@ export default class Login extends Vue {
   public handleSubmit() {
     this.$store.state.isLogin = true;
     router.push("/booking");
+    this.$store.state.email = "email"
   }
 }
 </script>
