@@ -1,6 +1,6 @@
 <template>
   <el-form label-position="left" label-width="0px" class="login-container">
-    <h3 class="title">Login</h3>
+    <h3 class="title">Account</h3>
     <el-form-item prop="account">
       <el-input type="text" auto-complete="off" v-bind:placeholder="email"></el-input>
     </el-form-item>
@@ -11,7 +11,7 @@
       <el-input type="text" auto-complete="off" v-bind:placeholder="HC"></el-input>
     </el-form-item>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click="handleSubmit" >Submit</el-button>
+      <el-button type="primary" style="width:100%;" @click="handleSubmit" >Modify</el-button>
     </el-form-item>
     <router-link to="/register" style="text-align: center; display: block">Register</router-link>
   </el-form>

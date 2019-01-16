@@ -23,9 +23,15 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Navbar extends Vue {
-  private isLogin = false;
-  private login = "No LOGIN";
   private activeIndex = "booking";
+
+  get login() {
+    return this.$store.state.email;
+  }
+
+  get isLogin() {
+    return this.$store.state.isLogin;
+  }
 }
 </script>
 

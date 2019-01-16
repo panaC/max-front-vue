@@ -16,11 +16,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { router } from './App.vue';
 
 @Component
 export default class Login extends Vue {
   public handleSubmit() {
-    console.log("Hello");
+    this.$store.state.isLogin = true;
+    router.push("/booking");
   }
 }
 </script>

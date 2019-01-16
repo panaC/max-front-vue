@@ -11,12 +11,15 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Navbar from "./navbar.vue";
 import VueRouter from 'vue-router';
+
 import Login from './login.vue';
 import Booking from './booking.vue';
 import Register from './register.vue';
 import Account from './account.vue';
 
-const router = new VueRouter({
+import { store } from '../store/store';
+
+export const router = new VueRouter({
   routes: [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
@@ -27,7 +30,7 @@ const router = new VueRouter({
 })
 
 router.beforeResolve((to, from, next) => {
-  if ((typeof(Storage) !== "undefined" && localStorage.getItem("test")) || to.path == "/login" || to.path == "/register") {
+  if (store.state.isLogin || to.path == "/login" || to.path == "/register") {
     return next();
   }
   next({
