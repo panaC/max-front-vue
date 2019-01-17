@@ -18,7 +18,12 @@ export default class userService {
     const url = "http://localhost:3000/auth/login"
     try {
       const reponse = await axios.post(url, user);
-      this._token = reponse.data.access;
+      this._user = user;
+      if (reponse.data.accessToken) {
+        this._token = reponse.data.accessToken;
+      } else {
+        throw new Error(reponse.data.message || reponse.data);
+      }
     } catch (err) {
       throw err;
     }
@@ -26,7 +31,7 @@ export default class userService {
   }
 
   async isValidate(token: string) {
-    const url = "http://localhost:3000/auth/validate"
+    const url = "http://localhost:3000/auth/verify"
     let bool = false;
     try {
       const reponse = await axios.post(url, { token: this._token});
@@ -38,9 +43,9 @@ export default class userService {
   }
 
   async getUser(email: string) {
-     const url = "http://localhost:3000/auth/validate"
+     const url = "http://localhost:3000/user/get"
     try {
-      const reponse = await axios.post(url, { email: this.user.email});
+      const reponse = await axios.get(`${url}?email=${this.user.email}`);
       if (reponse.data.length) {
         this._user = reponse.data
       }
