@@ -34,7 +34,7 @@ export default class userService {
     const url = "http://localhost:3000/auth/verify"
     let bool = false;
     try {
-      const reponse = await axios.post(url, { token: this._token});
+      const reponse = await axios.get(`${url}?token=${this._token}`);
       bool = (reponse.data.length ? true : false);
     } catch (err) {
       throw err;
@@ -43,9 +43,9 @@ export default class userService {
   }
 
   async getUser(email: string) {
-     const url = "http://localhost:3000/user/get"
+     const url = "http://localhost:3000/auth/user"
     try {
-      const reponse = await axios.get(`${url}?email=${this.user.email}`);
+      const reponse = await axios.get(`${url}?token=${this._token}`);
       if (reponse.data.length) {
         this._user = reponse.data
       }
