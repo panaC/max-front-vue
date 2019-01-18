@@ -5,6 +5,7 @@ import App from "./components/App.vue";
 import Vuex from 'vuex'
 import { store } from './store/store';
 
+Vue.use(Vuex);
 Vue.use(VueRouter);
 
 let v = new Vue({

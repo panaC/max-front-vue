@@ -10,36 +10,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Navbar from "./navbar.vue";
-import VueRouter from 'vue-router';
 
-import Login from './login.vue';
-import Booking from './booking.vue';
-import Register from './register.vue';
-import Account from './account.vue';
-import Logout from './logout.vue';
-
-import { store } from '../store/store';
-
-export const router = new VueRouter({
-  routes: [
-    { path: '/login', component: Login },
-    { path: '/register', component: Register },
-    { path: '/booking', component: Booking },
-    { path: '/account', component: Account },
-    { path: '/logout', component: Logout },
-    { path: '*', component: Booking },
-  ]
-})
-
-router.beforeResolve((to, from, next) => {
-  if (store.state.isLogin || to.path == "/login" || to.path == "/register") {
-    return next();
-  }
-  next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    });
-});
+import { router } from '../router/router';
 
 @Component({
   components: {

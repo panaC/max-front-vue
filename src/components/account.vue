@@ -2,13 +2,13 @@
   <el-form label-position="left" label-width="0px" class="login-container">
     <h3 class="title">Account</h3>
     <el-form-item prop="account">
-      <el-input type="text" auto-complete="off" v-bind:placeholder="email"></el-input>
+      <el-input type="text" auto-complete="off" v-bind:placeholder="email" v-model="email"></el-input>
     </el-form-item>
     <el-form-item prop="checkPass">
-      <el-input type="password"  auto-complete="off" v-bind:placeholder="password"></el-input>
+      <el-input type="password"  auto-complete="off" v-bind:placeholder="password" v-model="password"></el-input>
     </el-form-item>
     <el-form-item prop="account">
-      <el-input type="text" auto-complete="off" v-bind:placeholder="HC"></el-input>
+      <el-input type="text" auto-complete="off" v-bind:placeholder="hc" v-model="hc"></el-input>
     </el-form-item>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click="handleSubmit" >Modify</el-button>
@@ -23,10 +23,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class Login extends Vue {
   email = "";
   password = "";
-  HC = "";
+  hc = "";
 
   public handleSubmit() {
-    console.log("Hello");
+    this.$store.state.user.setUser({
+      email: this.email,
+      password: this.password,
+      hccode: this.hc
+    })
   }
 }
 </script>

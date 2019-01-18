@@ -1,14 +1,16 @@
 import Vuex from 'vuex';
 import Vue from "vue";
+import userService from '../services/user.service';
 
+// set here to declare new class
 Vue.use(Vuex);
 
-// @TODO : check isLogin by call fct service check token if saved in localstorage and valid
+interface Istore {
+  user: userService;
+}
 
-export const store = new Vuex.Store({
+export const store = new Vuex.Store<Istore>({
   state: {
-    token: "",
-    isLogin: false,
-    email: "No Login",
+    user: new userService(),
   }
 })

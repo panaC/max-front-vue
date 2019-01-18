@@ -2,13 +2,13 @@
   <el-form label-position="left" label-width="0px" class="login-container">
     <h3 class="title">Register</h3>
     <el-form-item prop="account">
-      <el-input type="text" auto-complete="off" placeholder="email"></el-input>
+      <el-input type="text" auto-complete="off" placeholder="email" v-model="email"></el-input>
     </el-form-item>
     <el-form-item prop="checkPass">
-      <el-input type="password"  auto-complete="off" placeholder="password"></el-input>
+      <el-input type="password"  auto-complete="off" placeholder="password" v-model="pass"></el-input>
     </el-form-item>
     <el-form-item prop="account">
-      <el-input type="text" auto-complete="off" placeholder="HC TGVMAX code"></el-input>
+      <el-input type="text" auto-complete="off" placeholder="HC TGVMAX code" v-model="hc"></el-input>
     </el-form-item>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click="handleSubmit" >Submit</el-button>
@@ -19,11 +19,25 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { router } from '../router/router';
 
 @Component
 export default class Login extends Vue {
+  private email = "";
+  private pass = "";
+  private hc = "";
+
   public handleSubmit() {
-    console.log("Hello");
+    try {
+      this.$store.state.user.register({
+        email: this.email,
+        password: this.pass,
+        hccode: this.hc,
+      })
+      router.push("/booking");
+    } finally {
+
+    }
   }
 }
 </script>

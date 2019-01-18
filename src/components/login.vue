@@ -1,11 +1,12 @@
 <template>
   <el-form label-position="left" label-width="0px" class="login-container">
+    <div class="route">{{ route }}</div>
     <h3 class="title">Login</h3>
     <el-form-item prop="account">
-      <el-input type="text" auto-complete="off" placeholder="email"></el-input>
+      <el-input type="text" auto-complete="off" placeholder="email" v-model="email"></el-input>
     </el-form-item>
     <el-form-item prop="checkPass">
-      <el-input type="password"  auto-complete="off" placeholder="password"></el-input>
+      <el-input type="password"  auto-complete="off" placeholder="password" v-model="pass"></el-input>
     </el-form-item>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click="handleSubmit" >Submit</el-button>
@@ -16,14 +17,38 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { router } from './App.vue';
+import { router } from '../router/router';
 
-@Component
+@Component({
+})
 export default class Login extends Vue {
-  public handleSubmit() {
-    this.$store.state.isLogin = true;
-    router.push("/booking");
-    this.$store.state.email = "email"
+  private email = "";
+  private pass = "";
+
+  get route() {
+    if (this.$store.state.user.isLogin) {
+      this.$router.push('/booking');
+    }
+    return "";
+  }
+  
+  // doesn't work, the store is loaded after router and vue component why ?
+  /*beforeCreate() {
+    if (this.$store.state.user.isLogin) {
+      router.push('/booking');
+    }
+  }*/
+
+  public async handleSubmit() {
+    try {
+      await this.$store.state.user.login({
+        email: this.email,
+        password: this.pass,
+      })
+      router.push("/booking");
+    } finally {
+
+    }
   }
 }
 </script>
