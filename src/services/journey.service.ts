@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+import { store } from '../store/store';
 
 export interface Ijourney {
   originCode: string;
@@ -19,7 +20,11 @@ export default class JourneyService {
   async getJourney(): Promise<Ijourney[]> {
     const url = "http://localhost:3000/journeys";
     try {
-      const reponse = await axios.get(`${url}?origin=${this.origin}&destination=${this.destination}&date=${this.date}`)
+      const reponse = await axios.get(`${url}?origin=${this.origin}&destination=${this.destination}&date=${this.date}`, {
+        headers:{
+          'Authorization': `Bearer ${store.state.user.token}`,
+        }
+      })
       this.result = reponse.data;
     } catch (e) {
       throw e;

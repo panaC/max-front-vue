@@ -30,8 +30,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-import journeyService, { Ijourney } from './journey.service';
-import JourneyService from './journey.service';
+import JourneyService, { Ijourney } from '../services/journey.service';
 import * as _ from 'lodash';
 
 export interface Ivalue {
