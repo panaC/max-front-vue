@@ -10,6 +10,9 @@
     <el-form-item prop="account">
       <el-input type="text" auto-complete="off" placeholder="HC TGVMAX code" v-model="hc"></el-input>
     </el-form-item>
+    <el-form-item prop="account">
+      <el-input type="text" auto-complete="off" placeholder="Date de naissance" v-model="dob"></el-input>
+    </el-form-item>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click="handleSubmit" >Submit</el-button>
     </el-form-item>
@@ -26,6 +29,7 @@ export default class Login extends Vue {
   private email = "";
   private pass = "";
   private hc = "";
+  private dob = "";
 
   public handleSubmit() {
     try {
@@ -33,6 +37,7 @@ export default class Login extends Vue {
         email: this.email,
         password: this.pass,
         hccode: this.hc,
+        dateOfBirth: this.dob,
       })
       router.push("/booking");
     } finally {

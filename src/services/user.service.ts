@@ -4,8 +4,9 @@ import axios from "axios";
 
 export interface Iuser {
   email: string;
-  password?: string;
-  hccode?: string;
+  password: string;
+  hccode: string;
+  dateOfBirth: string;
 }
 
 export default class userService {
@@ -13,7 +14,8 @@ export default class userService {
   private _user: Iuser = {
     email: "",
     password: "",
-    hccode: ""
+    hccode: "",
+    dateOfBirth: "",
   }
   private _isLogin = false;
 
@@ -89,7 +91,8 @@ export default class userService {
         this._user = {
           email: reponse.data.email,
           password: "",
-          hccode: ""
+          hccode: "",
+          dateOfBirth: "",
         }
       }
     } catch (err) {
@@ -106,7 +109,7 @@ export default class userService {
           'Authorization': `Bearer ${this._token}`,
         }
       });
-      if (reponse.data.length) {
+      if (!reponse.data.message) {
         this._user = reponse.data;
       }
     } catch (err) {
@@ -119,7 +122,7 @@ export default class userService {
     const url = "http://localhost:3000/auth/user"
     let bool = false;
     try {
-      const reponse = await axios.post(url, user, {
+      const reponse = await axios.post(`${url}?token=${this._token}`, user, {
         headers:{
           'Authorization': `Bearer ${this._token}`,
         }
@@ -139,7 +142,8 @@ export default class userService {
     this._user = {
       email: "",
       password: "",
-      hccode: ""
+      hccode: "",
+      dateOfBirth: "",
     }
     this._token = "";
     if (typeof (Storage) !== "undefined") {
@@ -147,13 +151,6 @@ export default class userService {
     }
     router.push("/login");
     return "logout";
-  }
-
-  get user() {
-    if (this._user.hccode === "") {
-      return this.getUser();
-    }
-    return this._user;
   }
 
   get token() {
@@ -166,5 +163,17 @@ export default class userService {
 
   get email() {
     return (this._user.email === "" ? 'No Login' : this._user.email);
+  }
+
+  get password() {
+    return this._user.password;
+  }
+  
+  get hccode() {
+    return this._user.hccode;
+  }
+
+  get dateOfBirth() {
+    return this._user.dateOfBirth;
   }
 }
