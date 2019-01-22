@@ -19,7 +19,7 @@
             fixed="right"
             label="Operations">
             <template slot-scope="scope">
-              <el-button @click="handleClick" type="text" size="small">choisir</el-button>
+              <el-button @click="handleClick(scope.$index, journeys)" type="text" size="small">choisir</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -31,6 +31,8 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import JourneyService, { Ijourney } from '../services/journey.service';
+import DisplayService from '../services/display.service';
+import { ITicket } from '../services/ticket.interface';
 import * as _ from 'lodash';
 
 export interface Ivalue {
@@ -58,8 +60,6 @@ export default class DisplayJourney extends Vue {
   @debounce(3000)
   @Watch('value')
   onUpdate() {
-    console.log("onUpdate");
-    
     if(this.value.display) {
       this.loading = true;
       const service = new JourneyService(this.value.orig, this.value.dest, this.value.date.toISOString());
@@ -74,6 +74,18 @@ export default class DisplayJourney extends Vue {
       
       })
     }
+  }
+
+  handleClick(index: any, rows: any) {
+    const data = rows.splice(index, 1);
+    const ticket: ITicket = {
+      email: this.$store.state.user.email as string,
+      originCode: data[0].originCode.split(' ').join('') as string,
+      destinationCode: data[0].destinationCode.split(' ').join('') as string,
+      departureDateTime: data[0].departureDateTime,
+    }
+    // true if ticket saved
+    new DisplayService().sendTicket(ticket);
   }
 }
 </script>
