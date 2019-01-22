@@ -4,6 +4,7 @@ import Booking from '../components/booking.vue';
 import Register from '../components/register.vue';
 import Account from '../components/account.vue';
 import Logout from '../components/logout.vue';
+import Tickets from '../components/tickets.vue';
 
 import { store } from '../store/store';
 
@@ -11,6 +12,7 @@ export const router = new VueRouter({
   routes: [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
+    { path: '/tickets', component: Tickets },
     { path: '/booking', component: Booking },
     { path: '/account', component: Account },
     { path: '/logout', component: Logout },
