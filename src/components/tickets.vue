@@ -35,16 +35,12 @@ export default class Ticket extends Vue {
   private errorFetch = false;
   
   beforeCreate() {
-      console.log("pa");
     this.loading = true;
     new TicketService().getTicket(this.$store.state.user.email).then((data) => {
-      console.log("pass");
-      
       this.errorFetch = false;
       this.loading = false;
       this.ticket = data;
     }).catch((err) => {
-      console.log("pass [as");
       this.loading = false;
       this.errorFetch = true;
       this.ticket = [];
