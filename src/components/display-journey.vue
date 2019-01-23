@@ -33,11 +33,12 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import JourneyService, { Ijourney } from '../services/journey.service';
 import DisplayService from '../services/display.service';
 import { ITicket } from '../services/ticket.interface';
+import { DISPLAY_JOURNEYS_DEBOUNCE } from '../constants';
 import * as _ from 'lodash';
 
 export interface Ivalue {
   display: boolean,
-  date: Date;
+  date: string;
   orig: string;
   dest: string;
 }
@@ -57,12 +58,12 @@ export default class DisplayJourney extends Vue {
   private loading = true;
   private errorFetch = false;
 
-  @debounce(3000)
+  @debounce(DISPLAY_JOURNEYS_DEBOUNCE)
   @Watch('value')
   onUpdate() {
     if(this.value.display) {
       this.loading = true;
-      const service = new JourneyService(this.value.orig, this.value.dest, this.value.date.toISOString());
+      const service = new JourneyService(this.value.orig, this.value.dest, this.value.date);
       service.getJourney().then((data) => {
         this.errorFetch = false;
         this.loading = false;

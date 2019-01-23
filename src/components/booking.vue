@@ -9,6 +9,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import SelectJourney from "./select-journey.vue";
 import DisplayJourney, { Ivalue } from "./display-journey.vue";
+import MyDate from '../tools/date';
 
 @Component({
     components: {
@@ -19,7 +20,7 @@ import DisplayJourney, { Ivalue } from "./display-journey.vue";
 export default class Booking extends Vue {
     protected value: Ivalue = {
         display: false,
-        date: new Date(),
+        date: '',
         dest: '',
         orig: '' 
       }

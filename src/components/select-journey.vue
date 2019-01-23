@@ -61,6 +61,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { getStationList } from '../services/select.service';
+import toISOStringLocal from '../tools/date';
 
 @Component
 export default class SelectJourney extends Vue {
@@ -68,19 +70,32 @@ export default class SelectJourney extends Vue {
   valueDate = "";
   valueDestination = "";
   valueOrigin = "";
-  options: any = [{
+  options = getStationList();
+  
+  /*[{
       value: 'ANGERS%20ST%20LAUD',
       label: 'Angers',
     }, {
       value: 'PARIS%20(intramuros)',
       label: 'Paris',
-    }];
+    }];*/
+
+  private dateConvert(date: string): string {
+        const d = new Date(date);
+        console.log(date, d);
+        return new Date(Date.UTC(d.getFullYear(),
+            d.getMonth(),
+            d.getDay(),
+            d.getHours(),
+            d.getMinutes(),
+            d.getSeconds())).toISOString();
+    }
   
   private search() {
     // check the validation form here
     this.$emit('searchJourney', {
       display: true,
-      date: new Date(this.valueDate),
+      date: toISOStringLocal(new Date(this.valueDate)),
       dest: this.valueDestination,
       orig: this.valueOrigin,
     })
