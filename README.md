@@ -7,6 +7,6 @@ Coded with Vue.js, for easy web interface
 
 ```
 $> npm install
-$> npm run start
+$> npm run dev
 ```
 
