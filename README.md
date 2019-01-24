@@ -10,3 +10,9 @@ $> npm install
 $> npm run dev
 ```
 
+---
+
+![account](img/login.png)
+![account](img/booking.png)
+![account](img/ticket.png)
+![account](img/account.png)
