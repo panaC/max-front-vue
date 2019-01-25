@@ -7,7 +7,9 @@
     <el-row type="flex" justify="center">
       <el-col :span="24">
         <el-table :data="ticket" v-loading="loading">
+          <el-table-column prop="origin" label="origin" />
           <el-table-column prop="originCode" label="originCode" />
+          <el-table-column prop="destination" label="destination" />
           <el-table-column prop="destinationCode" label="destinationCode" />
           <el-table-column prop="departureDateTime" label="departureDateTime" />
           <el-table-column
@@ -51,7 +53,9 @@ export default class Ticket extends Vue {
     const data = rows.splice(index, 1);
     const ticket: ITicket = {
       email: this.$store.state.user.email as string,
+      origin: data[0].origin,
       originCode: data[0].originCode.split(' ').join('') as string,
+      destination: data[0].destination,
       destinationCode: data[0].destinationCode.split(' ').join('') as string,
       departureDateTime: data[0].departureDateTime,
     }

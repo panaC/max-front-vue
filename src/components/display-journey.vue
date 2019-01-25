@@ -81,7 +81,9 @@ export default class DisplayJourney extends Vue {
     const data = rows.splice(index, 1);
     const ticket: ITicket = {
       email: this.$store.state.user.email as string,
+      origin: data[0].originName,
       originCode: data[0].originCode.split(' ').join('') as string,
+      destination: data[0].destinationName,
       destinationCode: data[0].destinationCode.split(' ').join('') as string,
       departureDateTime: data[0].departureDateTime,
     }
